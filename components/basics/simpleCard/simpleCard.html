@@ -1,0 +1,85 @@
+<style>
+    .square{
+      height: 35px;
+      width: 35px;
+      border-radius: 0.5rem;
+    }
+
+    .value-text {
+        font-size: 3rem;
+        font-weight:700;
+        font-family: 'Quicksand';
+       
+    }
+    .text-white {
+        color: #D0D4E6;
+    }
+    .card-title {
+        font-size: 1.5rem;
+        color: #AAB2C5;
+    }
+    
+    .card-simple{
+        padding-top:'5px' !important;
+        padding-bottom:'1px' !important;
+       
+    }
+
+    
+    @media (max-width: 1400px) and (min-width: 1280px) {
+
+        .value-text {
+            font-size: 2.5rem;
+        }
+        .card-title {
+            font-size: 1.1rem;
+        }
+        
+        .card-simple{
+        padding-top:'3px' !important;
+        padding-bottom:'1px' !important;
+       
+    }
+   
+    }
+
+</style>
+
+<ma-get-point-value  point="$ctrl.data"></ma-get-point-value>
+<div style="display: none"><ma-date-range-picker from="from" to="to" preset="LAST_1_MONTHS" ></ma-date-range-picker></div>
+<ma-point-statistics point="$ctrl.data" from="from" to="to" statistics="statsObj"></ma-point-statistics>
+
+
+<md-card ng-style="{background:'#122F48'}">
+    <md-card-content>
+        <div flex="100" layout="row" layout-align="start center" class="card-simple" >
+            
+            <div layout="column" ng-style="{paddingTop:'10px', paddingBottom:'15px',paddingRight:'10px', paddingLeft:'10px'}">
+                <img src="{{$ctrl.iconCard}}" ng-style="{width: '35px'}">     
+                <div ng-if="!$ctrl.iconCard" class= "square" ng-style="{ background: $ctrl.data.renderedColor}">
+                       </br>
+                </div>
+            </div>
+           
+            <div layout="column" class="md-list-item-text" ng-style="{paddingTop:'15px',paddingBottom:'10px', paddingleft:'10px', paddingRight:'10px'}">
+                <p class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}"> {{$ctrl.titleCard}} </p>
+                <h1  class="bold-font"  ng-style="{margin: '0'}"  >
+                    <span ng-if="$ctrl.data.value < 0"  class="value-text text-white">N/A</span>   
+                    <span ng-if="!$ctrl.site && !$ctrl.timestamp && !$ctrl.integral && $ctrl.data.value >= 0 "  class="value-text text-white">{{$ctrl.data.renderedValue}}</span>   
+                    <span  ng-if="$ctrl.site" class="value-text text-white">{{$ctrl.data.renderedValue}} de {{$ctrl.site}}</span>   
+                    
+                    <span ng-if="$ctrl.timestamp "  class="value-text text-white">{{statsObj.first.timestamp | maMoment:'format':'ll LTS'}}</span>
+                    <span ng-if="$ctrl.integral"  class="value-text text-white">{{statsObj.integral.value}}</span> 
+                    
+                </h1>
+                               </br>
+                 
+                 
+            </div>
+
+        </div>
+
+            
+        
+    </md-card-content>
+</md-card>

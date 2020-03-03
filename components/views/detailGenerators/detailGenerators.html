@@ -1,0 +1,447 @@
+<ma-get-point-value  point="$ctrl.generators.g1autoMode"></ma-get-point-value>
+<ma-get-point-value  point="$ctrl.generators.g1manualMode"></ma-get-point-value>
+<ma-get-point-value  point="$ctrl.generators.g1stopMode"></ma-get-point-value>
+<ma-get-point-value  point="$ctrl.generators.g2autoMode"></ma-get-point-value>
+<ma-get-point-value  point="$ctrl.generators.g2manualMode"></ma-get-point-value>
+<ma-get-point-value  point="$ctrl.generators.g2stopMode"></ma-get-point-value>
+<ma-get-point-value  point="$ctrl.generators.g1available"></ma-get-point-value>
+<ma-get-point-value  point="$ctrl.generators.g2available"></ma-get-point-value>
+<ma-get-point-value  point="$ctrl.generators.g1status"></ma-get-point-value>
+<ma-get-point-value  point="$ctrl.generators.g2status"></ma-get-point-value>
+
+<div layout="row" flex="100" layout-wrap>
+    <div flex="100" flex-gt-sm="50" flex-gt-md="20" layout="column">
+        <ph-simple-card 
+        title-card = "Horas de trabajo total" 
+        icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+        data="$ctrl.generators.runtime"
+        ></ph-simple-card>
+    </div>
+    <div flex="100" flex-gt-sm="50" flex-gt-md="20" layout="column">
+        <ph-total-card 
+            title-card="Potencia actual" 
+            icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+            icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+            icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+            data="$ctrl.generators.powerTotal"    
+            total-squares="20"
+            min-value="0"
+            max-value="768 "
+            first-interval="50"
+            second-interval="62.5"
+            unit="KW"
+        ></ph-total-card>
+    </div>
+    <div flex="100" flex-gt-sm="50" flex-gt-md="20" layout="column">
+        <ph-total-card 
+            title-card="Corriente total" 
+            icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+            icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+            icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+            data="$ctrl.generators.currentTotal"    
+            total-squares="20"
+            min-value="0"
+            max-value="1200"
+            first-interval="50"
+            second-interval="62.5" 
+            unit="A"
+        ></ph-total-card>
+    </div>
+    <div flex="100" flex-gt-sm="50" flex-gt-md="20" layout="column">
+        <ph-average-card 
+            title-card="Voltaje L-L promedio" 
+            icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+            icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+            icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+            data="$ctrl.generators.voltageLl" 
+            total-squares="20"
+            min-value="438"
+            avg-value="480"
+            max-value="528"
+            first-interval="50"
+            second-interval="75"
+            unit="V"
+        ></ph-average-card>
+    </div>
+    <div flex="100" flex-gt-sm="50" flex-gt-md="20" layout="column">
+        <ph-average-card 
+            title-card="Voltaje L-N promedio" 
+            icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+            icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+            icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+            data="$ctrl.generators.voltageLn" 
+            total-squares="20"
+            min-value="221"
+            avg-value="277"
+            max-value="332"
+            first-interval="50"
+            second-interval="75"
+            unit="V"
+        ></ph-average-card>
+    </div>
+</div>   
+
+<div flex="100" layout="row" layout-align="start center" >
+    <md-card flex="100" layout="column">
+        <md-card-content >
+            <md-tabs flex="noshrink" layout="column" md-border-bottom="true" md-swipe-content="false" md-dynamic-height md-selected="$ctrl.generatorActiveTab">
+                <md-tab >
+                    <md-tab-label ng-style="{background-color: '#316088'}">
+                        <span class="text-body" >Generador 1</span>
+                    </md-tab-label>
+    
+                    <md-tab-body ng-style="{background-color: '#316088'}">
+                        <div flex="100" layout="row" layout-align="space-around center" layout-align-gt-sm="space-around center" layout-wrap>
+                            
+                            <div layout="column" flex="100" flex-gt-sm="100" flex-gt-md="20">
+                                <div flex="100" layout="column" layout-align="center center" layout-wrap>
+                                    <img src="/rest/v2/file-stores/public/resources/img/generator.svg" ng-style="{width:'260px',height: '180px'}">
+                                </div>
+                                <div flex="100" layout="column" layout-align="center center" layout-wrap>
+                                    <label class="text-body">Estatus</label>
+                                    <ma-switch ng-if = "$ctrl.g1available.value == true && $ctrl.generators.g1status.value == true "point="$ctrl.generators.g1available"></ma-switch>
+                                    <ma-switch point="$ctrl.generators.g1status"></ma-switch>
+                                        
+                                </div>
+                            </div>
+      
+                            <div layout="column" flex="100" flex-gt-sm="100" flex-gt-md="80" >
+                                <div layout="row" flex="100" layout-align="space-around center" layout-wrap>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column">
+                                        <ph-simple-card ng-if="$ctrl.generators.g1autoMode.value === true"
+                                            title-card = "Modo" 
+                                            data="$ctrl.generators.g1autoMode"
+                                        ></ph-simple-card>
+                                        <ph-simple-card ng-if="$ctrl.generators.g1manualMode.value === true"
+                                            title-card = "Modo" 
+                                            data="$ctrl.generators.g1manualMode"
+                                        ></ph-simple-card>
+                                        <ph-simple-card ng-if="$ctrl.generators.g1stopMode.value == true"
+                                            title-card = "Modo" 
+                                            data="$ctrl.generators.g1stopMode"
+                                        ></ph-simple-card>
+                                    </div>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column" >
+                                        <ph-simple-card 
+                                            title-card = "Horas de trabajo" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+                                            data="$ctrl.generators.g1runtime"
+                                           
+                                        ></ph-simple-card>  
+                                    </div>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column" >
+                                        <ph-simple-card 
+                                            title-card = "Último encendido" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/calendar-icon.svg"
+                                            data="$ctrl.generators.g1available"
+                                            timestamp = "true"
+                                        ></ph-simple-card>  
+                                    </div>
+                                </div>
+                                <div layout="row" flex="100" layout-align="space-around center" layout-wrap>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column">
+                                        <ph-total-card 
+                                            title-card = "Combustible" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                            icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                            icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                            data="$ctrl.generators.g1fuelLevel"
+                                            total-squares="20"
+                                            min-value="0"
+                                            max-value="800 "
+                                            first-interval="50"
+                                            second-interval="70" 
+                                            unit="L"
+                                        ></ph-total-card>  
+                                    </div>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column" >
+                                        <ph-average-card 
+                                            title-card = "Temp. de refrigerante" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/temperature-icon.svg"
+                                            icon-card-yellow="/rest/v2/file-stores/public/resources/img/temperature-icon-yellow.svg"
+                                            icon-card-red="/rest/v2/file-stores/public/resources/img/temperature-icon-red.svg"
+                                            data="$ctrl.generators.g1refTemperature" 
+                                            total-squares="20"
+                                            min-value="0"
+                                            avg-value="60"
+                                            max-value="120"
+                                            first-interval="100"
+                                            second-interval="105"
+                                            unit="°C"
+                                           
+                                        ></ph-average-card>  
+                                    </div>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column" >
+                                        <ph-average-card 
+                                            <ph-average-card 
+                                            title-card = "Presión de aceite" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/pressure-icon.svg"
+                                            icon-card-yellow="/rest/v2/file-stores/public/resources/img/pressure-icon-yellow.svg"
+                                            icon-card-red="/rest/v2/file-stores/public/resources/img/pressure-icon-red.svg"
+                                            data="$ctrl.generators.g1oilPressure" 
+                                            total-squares="20"
+                                            min-value="0"
+                                            avg-value="80"
+                                            max-value="160"
+                                            first-interval="100"
+                                            second-interval="110"
+                                            unit="psi"
+                                        ></ph-average-card >  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-title">Parámetros eléctricos</span>
+                        <div layout="row" flex="100" layout-wrap>
+                            <div flex="100" flex-gt-sm="50" flex-gt-md="25" layout="column">
+                                <ph-total-card 
+                                    title-card="Potencia activa" 
+                                    icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+                                    icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+                                    icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+                                    data="$ctrl.generators.g1activePower"    
+                                    total-squares="20"
+                                    min-value="0"
+                                    max-value="384"
+                                    first-interval="50"
+                                    second-interval="70"
+                                    unit="KW"
+                                    
+                                ></ph-total-card>
+                            </div>
+                            <div flex="100" flex-gt-sm="50" flex-gt-md="25" layout="column">
+                                <ph-total-card 
+                                    title-card="Potencia reactiva" 
+                                    icon-card="/rest/v2/file-stores/public/resources/img/reac-power-icon.svg"
+                                    icon-card-yellow="/rest/v2/file-stores/public/resources/img/reac-power-icon-yellow.svg"
+                                    icon-card-red="/rest/v2/file-stores/public/resources/img/reac-power-icon-red.svg"
+                                    data="$ctrl.generators.g1reactivePower"    
+                                    total-squares="20"
+                                    min-value="0"
+                                    max-value="384"
+                                    first-interval="50"
+                                    second-interval="70" 
+                                    unit="KVAR"
+                                ></ph-total-card>
+                            </div>
+                            <div flex="100" flex-gt-sm="50" flex-gt-md="25" layout="column">
+                                <ph-total-card 
+                                    title-card="Potencia total" 
+                                    icon-card="/rest/v2/file-stores/public/resources/img/total-power-icon.svg"
+                                    icon-card-yellow="/rest/v2/file-stores/public/resources/img/total-power-icon-yellow.svg"
+                                    icon-card-red="/rest/v2/file-stores/public/resources/img/total-power-icon-red.svg"
+                                    data="$ctrl.generators.g1totalPower" 
+                                    total-squares="20"
+                                    min-value="0"
+                                    max-value="384"
+                                    first-interval="50"
+                                    second-interval="70"
+                                    unit="KVA"
+                                ></ph-total-card>
+                            </div>
+                            <div flex="100" flex-gt-sm="50" flex-gt-md="25" layout="column">
+                                <ph-total-card 
+                                    title-card="Corriente total" 
+                                    icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                    icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                    icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                    data="$ctrl.generators.g1currentTotal" 
+                                    total-squares="20"
+                                    min-value="0"
+                                    max-value="600"
+                                    first-interval="50"
+                                    second-interval="75"
+                                    unit="A"
+                                ></ph-total-card>
+                            </div>
+                        </div>   
+                    </md-tab-body>
+                </md-tab>
+                <md-tab >
+                    <md-tab-label ng-style="{background-color: '#316088'}">
+                        <span class="text-body">Generador 2</span>
+                    </md-tab-label>
+    
+                    <md-tab-body ng-style="{background-color: '#316088'}">
+                        <div flex="100" layout="row" layout-align="space-around center" layout-align-gt-sm="space-around center" layout-wrap>
+                            
+                            <div layout="column" flex="100" flex-gt-sm="100" flex-gt-md="20">
+                                <div flex="100" layout="column" layout-align="center center" layout-wrap>
+                                    <img src="/rest/v2/file-stores/public/resources/img/generator.svg" ng-style="{width:'260px',height: '180px'}">
+                                </div>
+                                <div flex="100" layout="column" layout-align="center center" layout-wrap>
+                                    <label class="text-body">Estatus</label>
+                                    <ma-switch point="$ctrl.generators.g2status"></ma-switch>
+                                        
+                                </div>
+                            </div>
+      
+                            <div layout="column" flex="100" flex-gt-sm="100" flex-gt-md="80" >
+                                <div layout="row" flex="100" layout-align="space-around center" layout-wrap>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column">
+                                        <ph-simple-card ng-if="$ctrl.generators.g2autoMode.value === true"
+                                            title-card = "Modo" 
+                                            data="$ctrl.generators.g2autoMode"
+                                        ></ph-simple-card>
+                                        <ph-simple-card ng-if="$ctrl.generators.g2manualMode.value === true"
+                                            title-card = "Modo" 
+                                            data="$ctrl.generators.g2manualMode"
+                                        ></ph-simple-card>
+                                        <ph-simple-card ng-if="$ctrl.generators.g2stopMode.value == true"
+                                            title-card = "Modo" 
+                                            data="$ctrl.generators.g2stopMode"
+                                        ></ph-simple-card>  
+                                    </div>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column" >
+                                        <ph-simple-card 
+                                            title-card = "Horas de trabajo" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+                                            data="$ctrl.generators.g2runtime" 
+                                           
+                                        ></ph-simple-card>  
+                                    </div>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column" >
+                                        <ph-simple-card 
+                                            title-card = "Último encendido" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/calendar-icon.svg"
+                                            data="$ctrl.generators.g2available"
+                                            timestamp = "true"
+                                        ></ph-simple-card>  
+                                    </div>
+                                </div>
+                                <div layout="row" flex="100" layout-align="space-around center" layout-wrap>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column">
+                                        <ph-total-card 
+                                            title-card = "Combustible" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                            icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                            icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                            data="$ctrl.generators.g2fuelLevel"
+                                            total-squares="20"
+                                            min-value="0"
+                                            max-value="800 "
+                                            first-interval="50"
+                                            second-interval="70" 
+                                            unit="L"
+                                        ></ph-total-card>  
+                                    </div>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column" >
+                                        <ph-average-card 
+                                            title-card = "Temp. de refrigerante" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/temperature-icon.svg"
+                                            icon-card-yellow="/rest/v2/file-stores/public/resources/img/temperature-icon-yellow.svg"
+                                            icon-card-red="/rest/v2/file-stores/public/resources/img/temperature-icon-red.svg"
+                                            data="$ctrl.generators.g2refTemperature" 
+                                            total-squares="20"
+                                            min-value="0"
+                                            avg-value="60"
+                                            max-value="120"
+                                            first-interval="100"
+                                            second-interval="105"
+                                            unit="°C"
+                                           
+                                        ></ph-average-card>  
+                                    </div>
+                                    <div flex="100" flex-gt-sm="50" flex-gt-md="30" layout="column" >
+                                        <ph-average-card 
+                                            <ph-average-card 
+                                            title-card = "Presión de aceite" 
+                                            icon-card="/rest/v2/file-stores/public/resources/img/pressure-icon.svg"
+                                            icon-card-yellow="/rest/v2/file-stores/public/resources/img/pressure-icon-yellow.svg"
+                                            icon-card-red="/rest/v2/file-stores/public/resources/img/pressure-icon-red.svg"
+                                            data="$ctrl.generators.g2oilPressure" 
+                                            total-squares="20"
+                                            min-value="0"
+                                            avg-value="80"
+                                            max-value="160"
+                                            first-interval="100"
+                                            second-interval="110"
+                                            unit="psi"
+                                        ></ph-average-card >  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-title">Parámetros eléctricos</span>
+                        <div layout="row" flex="100" layout-wrap>
+                            <div flex="100" flex-gt-sm="50" flex-gt-md="25" layout="column">
+                                <ph-total-card 
+                                    title-card="Potencia activa" 
+                                    icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+                                    icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+                                    icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+                                    data="$ctrl.generators.g2activePower"    
+                                    total-squares="20"
+                                    min-value="0"
+                                    max-value="384"
+                                    first-interval="50"
+                                    second-interval="70"
+                                    unit="KW"
+                                    
+                                ></ph-total-card>
+                            </div>
+                            <div flex="100" flex-gt-sm="50" flex-gt-md="25" layout="column">
+                                <ph-total-card 
+                                    title-card="Potencia reactiva" 
+                                    icon-card="/rest/v2/file-stores/public/resources/img/reac-power-icon.svg"
+                                    icon-card-yellow="/rest/v2/file-stores/public/resources/img/reac-power-icon-yellow.svg"
+                                    icon-card-red="/rest/v2/file-stores/public/resources/img/reac-power-icon-red.svg"
+                                    data="$ctrl.generators.g2reactivePower"    
+                                    total-squares="20"
+                                    min-value="0"
+                                    max-value="384"
+                                    first-interval="50"
+                                    second-interval="70"
+                                    unit="KVAR"
+                                ></ph-total-card>
+                            </div>
+                            <div flex="100" flex-gt-sm="50" flex-gt-md="25" layout="column">
+                                <ph-total-card 
+                                    title-card="Potencia total" 
+                                    icon-card="/rest/v2/file-stores/public/resources/img/total-power-icon.svg"
+                                    icon-card-yellow="/rest/v2/file-stores/public/resources/img/total-power-yellow.svg"
+                                    icon-card-red="/rest/v2/file-stores/public/resources/img/total-power-red.svg"
+                                    data="$ctrl.generators.g2totalPower" 
+                                    total-squares="20"
+                                    min-value="0"
+                                    max-value="384"
+                                    first-interval="50"
+                                    second-interval="70"
+                                    unit="KVA"
+                                ></ph-total-card>
+                            </div>
+                            <div flex="100" flex-gt-sm="50" flex-gt-md="25" layout="column">
+                                <ph-total-card 
+                                    title-card="Corriente total" 
+                                    icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                    icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                    icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                    data="$ctrl.generators.g2currentTotal" 
+                                    total-squares="20"
+                                    min-value="0"
+                                    max-value="600"
+                                    first-interval="50"
+                                    second-interval="75"
+                                    unit="A"
+                                ></ph-total-card>
+                            </div>
+                        </div>   
+                    </md-tab-body>
+                </md-tab>
+          
+          
+                
+            </md-tabs>
+        </md-card-content>
+    </md-card>
+</div>
+
+
+
+<div flex="100" flex-gt-sm="100" flex-gt-lg="90" layout="column" layout-align-gt-sm-lg="center center" ng-style="{paddingTop: '10px', paddingLeft:'10px', paddingRigh:'10px',paddingBottom: '10px'}">
+  <ph-charts site="$ctrl.site"  data = $ctrl.data ></ph-charts>
+ 
+</div>
+
+
+

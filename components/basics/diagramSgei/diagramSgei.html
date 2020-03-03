@@ -1,0 +1,368 @@
+<style>
+
+    text {
+        font-family:'Quicksand' !important;
+        font-weight: 700;
+    }
+
+    @keyframes cw {
+        from {
+            stroke-dashoffset:100;
+        }
+        to {
+            stroke-dashoffset:0;
+        }
+    }
+    
+    .live {
+        stroke:#F04D4F !important;
+        stroke-dasharray:0 !important;
+    }
+    
+    .dead {
+        stroke:#61B576 !important;
+        stroke-dasharray:0 !important;
+    }
+    
+    .line-active {
+        stroke-dasharray:3 !important;
+        stroke-dashoffset:100;
+        animation: cw 10s linear infinite;
+    }
+    
+    .fill-white {
+        fill: #FFFFFF !important;
+    }
+    
+    .fill-green {
+        fill: #61B576 !important;
+    }
+    
+    .fill-red {
+        fill: #F04D4F !important;
+    }
+    
+    .fill-yellow {
+        fill: #FFBD6E !important;
+    }
+    
+    .hide {
+        display:none;
+    }
+    
+</style>
+
+<ma-get-point-value point="$ctrl.data.q1aStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q1aPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q1bStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q1bPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q2aStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q2aPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q2bStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q2bPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q3aStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q3aPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q3bStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q3bPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q4aPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q4aStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q4bPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q4bStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.qT01Status"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.qT01Pf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.qT02Status"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.qT02Pf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.qT03Status"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.qT03Pf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.qG01Status"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.qG02Status"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.qRnStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.q24Status"></ma-get-point-value>
+
+<ma-get-point-value point="$ctrl.data.voltage1a"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltage1b"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltage2a"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltage2b"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltage3a"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltage3b"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltage4a"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltage4b"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltageT02"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltageT03"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltageG01"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltageG02"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.voltageP"></ma-get-point-value>
+
+<ma-get-point-value point="$ctrl.data.current1a"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.current1b"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.current2a"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.current2b"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.current3a"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.current3b"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.current4a"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.current4b"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.currentT02"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.currentT03"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.currentG01"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.currentG02"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.currentP"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.data.busLive"></ma-get-point-value>
+
+<ma-svg ng-include="'/rest/v2/file-stores/public/resources/img/diagrama_sgei_actual.svg'" ng-style="{width:'100%', paddingTop: '0px', paddingBottom:'0px'}">
+    
+    <!-- Status, PF and colors-->
+    
+    <div ma-selector="#q-t01-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.qT01Pf.value)"></div>
+    <div ma-selector="#q-t01-status-text_2_ text" ng-bind="$ctrl.statusText($ctrl.data.qT01Status.value)"></div>
+    <div ma-selector="#q-t01-status-color_2_ rect" ng-class="$ctrl.statusColor($ctrl.data.qT01Status.value)"></div>
+    <div ma-selector="#q-t01-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.qT01Status.value)"></div>
+    
+    <div ma-selector="#q-t02-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.qT02Pf.value)"></div>
+    <div ma-selector="#q-t02-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.qT02Status.value)"></div>
+    <div ma-selector="#q-t02-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.qT02Status.value)"></div>
+    <div ma-selector="#q-t02-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.qT02Status.value)"></div>
+    
+    <div ma-selector="#q-t03-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.qT03Pf.value)"></div>
+    <div ma-selector="#q-t03-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.qT03Status.value)"></div>
+    <div ma-selector="#q-t03-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.qT03Status.value)"></div>
+    <div ma-selector="#q-t03-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.qT03Status.value)"></div>
+    
+    <div ma-selector="#q-1a-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.q1aPf.value)"></div>
+    <div ma-selector="#q-1a-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.q1aStatus.value)"></div>
+    <div ma-selector="#q-1a-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.q1aStatus.value)"></div>
+    <div ma-selector="#q-1a-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.q1aStatus.value)"></div>
+    
+    <div ma-selector="#q-1b-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.q1bPf.value)"></div>
+    <div ma-selector="#q-1b-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.q1bStatus.value)"></div>
+    <div ma-selector="#q-1b-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.q1bStatus.value)"></div>
+    <div ma-selector="#q-1b-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.q1bStatus.value)"></div>
+    
+    <div ma-selector="#q-2a-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.q2aPf.value)"></div>
+    <div ma-selector="#q-2a-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.q2aStatus.value)"></div>
+    <div ma-selector="#q-2a-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.q2aStatus.value)"></div>
+    <div ma-selector="#q-2a-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.q2aStatus.value)"></div>
+    
+    <div ma-selector="#q-2b-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.q2bPf.value)"></div>
+    <div ma-selector="#q-2b-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.q2bStatus.value)"></div>
+    <div ma-selector="#q-2b-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.q2bStatus.value)"></div>
+    <div ma-selector="#q-2b-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.q2bStatus.value)"></div>
+    
+    <div ma-selector="#q-3a-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.q3aPf.value)"></div>
+    <div ma-selector="#q-3a-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.q3aStatus.value)"></div>
+    <div ma-selector="#q-3a-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.q3aStatus.value)"></div>
+    <div ma-selector="#q-3a-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.q3aStatus.value)"></div>
+    
+    <div ma-selector="#q-3b-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.q3bPf.value)"></div>
+    <div ma-selector="#q-3b-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.q3bStatus.value)"></div>
+    <div ma-selector="#q-3b-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.q3bStatus.value)"></div>
+    <div ma-selector="#q-3b-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.q3bStatus.value)"></div>
+    
+    <div ma-selector="#q-4a-pf-text text" ng-class="$ctrl.pfClass($ctrl.data.q4aPf.value)"></div>
+    <div ma-selector="#q-4a-status-text text" ng-bind="$ctrl.statusText($ctrl.data.q4aStatus.value)"></div>
+    <div ma-selector="#q-4a-status-color rect" ng-class="$ctrl.statusColor($ctrl.data.q4aStatus.value)"></div>
+    <div ma-selector="#q-4a-warning" ng-class="$ctrl.warningClass($ctrl.data.q4aStatus.value)"></div>
+    
+    <div ma-selector="#q-4b-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.q4bPf.value)"></div>
+    <div ma-selector="#q-4b-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.q4bStatus.value)"></div>
+    <div ma-selector="#q-4b-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.q4bStatus.value)"></div>
+    <div ma-selector="#q-4b-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.q4bStatus.value)"></div>
+    
+    <div ma-selector="#q-g01-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.qG01Pf.value)"></div>
+    <div ma-selector="#q-g01-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.qG01Status.value)"></div>
+    <div ma-selector="#q-g01-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.qG01Status.value)"></div>
+    <div ma-selector="#q-g01-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.qG01Status.value)"></div>
+    
+    <div ma-selector="#q-g02-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.qG02Pf.value)"></div>
+    <div ma-selector="#q-g02-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.qG02Status.value)"></div>
+    <div ma-selector="#q-g02-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.qG02Status.value)"></div>
+    <div ma-selector="#q-g02-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.qG02Status.value)"></div>
+    
+    <div ma-selector="#q-rn-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.qRnPf.value)"></div>
+    <div ma-selector="#q-rn-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.qRnStatus.value)"></div>
+    <div ma-selector="#q-rn-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.qRnStatus.value)"></div>
+    <div ma-selector="#q-rn-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.qRnStatus.value)"></div>
+    
+    <div ma-selector="#q-p-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.qPPf.value)"></div>
+    <div ma-selector="#q-p-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.qPStatus.value)"></div>
+    <div ma-selector="#q-p-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.qPStatus.value)"></div>
+    <div ma-selector="#q-p-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.qPStatus.value)"></div>
+    
+    <div ma-selector="#q-24-pf-text_1_ text" ng-class="$ctrl.pfClass($ctrl.data.q24Pf.value)"></div>
+    <div ma-selector="#q-24-status-text_1_ text" ng-bind="$ctrl.statusText($ctrl.data.q24Status.value)"></div>
+    <div ma-selector="#q-24-status-color_1_ rect" ng-class="$ctrl.statusColor($ctrl.data.q24Status.value)"></div>
+    <div ma-selector="#q-24-warning_1_" ng-class="$ctrl.warningClass($ctrl.data.q24Status.value)"></div>
+    
+    <!-- Transformers Voltage Warnings-->
+    <div ma-selector="#t01-voltage-warning" ng-class="$ctrl.transformerVoltageWarningClass($ctrl.data.voltageT02.value)"></div>
+    <div ma-selector="#t02-voltage-warning" ng-class="$ctrl.transformerVoltageWarningClass($ctrl.data.voltageT02.value)"></div>
+    <div ma-selector="#t03-voltage-warning" ng-class="$ctrl.transformerVoltageWarningClass($ctrl.data.voltageT03.value)"></div>
+    
+    <!-- Upper Lines and Connectors Both Sides A and B-->
+    <div ma-selector="#q-t01-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageT02.value, $ctrl.data.currentT02.value)"></div>
+    <div ma-selector="#q-t01-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageT02.value, $ctrl.data.currentT02.value)"></div>
+    <div ma-selector="#q-t01-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageT02.value, $ctrl.data.qT01Status.value)"></div>
+    <div ma-selector="#q-t01-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageT02.value, $ctrl.data.qT01Status.value)"></div>
+    
+    <div ma-selector="#q-t02-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageT02.value, $ctrl.data.currentT02.value)"></div>
+    <div ma-selector="#q-t02-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageT02.value, $ctrl.data.currentT02.value)"></div>
+    <div ma-selector="#q-t02-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageT02.value, $ctrl.data.qT02Status.value)"></div>
+    <div ma-selector="#q-t02-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageT02.value, $ctrl.data.qT02Status.value)"></div>
+    
+    <div ma-selector="#q-t03-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageT03.value, $ctrl.data.currentT03.value)"></div>
+    <div ma-selector="#q-t03-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageT03.value, $ctrl.data.currentT03.value)"></div>
+    <div ma-selector="#q-t03-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageT03.value, $ctrl.data.qT03Status.value)"></div>
+    <div ma-selector="#q-t03-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageT03.value, $ctrl.data.qT03Status.value)"></div>
+    
+    <div ma-selector="#q-g01-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageG01.value, $ctrl.data.currentG01.value)"></div>
+    <div ma-selector="#q-g01-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageG01.value, $ctrl.data.currentG01.value)"></div>
+    <div ma-selector="#q-g01-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageG01.value, $ctrl.data.qG01Status.value)"></div>
+    <div ma-selector="#q-g01-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageG01.value , $ctrl.data.qG01Status.value)"></div>
+    
+    <div ma-selector="#q-g02-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageG02.value, $ctrl.data.currentG02.value)"></div>
+    <div ma-selector="#q-g02-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageG02.value, $ctrl.data.currentG02.value)"></div>
+    <div ma-selector="#q-g02-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageG02.value, $ctrl.data.qG02Status.value)"></div>
+    <div ma-selector="#q-g02-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageG02.value , $ctrl.data.qG02Status.value)"></div>
+    
+    <div ma-selector="#q-1a-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage1a.value, $ctrl.data.current1a.value)"></div>
+    <div ma-selector="#q-1a-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage1a.value, $ctrl.data.current1a.value)"></div>
+    <div ma-selector="#q-1a-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage1a.value, $ctrl.data.q1aStatus.value)"></div>
+    <div ma-selector="#q-1a-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage1a.value, $ctrl.data.q1aStatus.value)"></div>
+    
+    
+    <div ma-selector="#q-1b-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage1b.value, $ctrl.data.current1b.value)"></div>
+    <div ma-selector="#q-1b-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage1b.value, $ctrl.data.current1b.value)"></div>
+    <div ma-selector="#q-1b-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage1b.value, $ctrl.data.q1bStatus.value)"></div>
+    <div ma-selector="#q-1b-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage1b.value, $ctrl.data.q1bStatus.value)"></div>
+    
+    <div ma-selector="#q-2a-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage2a.value, $ctrl.data.current2a.value)"></div>
+    <div ma-selector="#q-2a-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage2a.value, $ctrl.data.current2a.value)"></div>
+    <div ma-selector="#q-2a-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage2a.value, $ctrl.data.q2aStatus.value)"></div>
+    <div ma-selector="#q-2a-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage2a.value, $ctrl.data.q2aStatus.value)"></div>
+    
+    <div ma-selector="#q-2b-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage2b.value, $ctrl.data.current2b.value)"></div>
+    <div ma-selector="#q-2b-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage2b.value, $ctrl.data.current2b.value)"></div>
+    <div ma-selector="#q-2b-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage2b.value, $ctrl.data.q2bStatus.value)"></div>
+    <div ma-selector="#q-2b-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage2b.value, $ctrl.data.q2bStatus.value)"></div>
+    
+    <div ma-selector="#q-3a-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage3a.value, $ctrl.data.current3a.value)"></div>
+    <div ma-selector="#q-3a-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage3a.value, $ctrl.data.current3a.value)"></div>
+    <div ma-selector="#q-3a-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage3a.value, $ctrl.data.q3aStatus.value)"></div>
+    <div ma-selector="#q-3a-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage3a.value, $ctrl.data.q3aStatus.value)"></div>
+    
+    <div ma-selector="#q-3b-line1_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage3b.value, $ctrl.data.current3b.value)"></div>
+    <div ma-selector="#q-3b-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage3b.value, $ctrl.data.current3b.value)"></div>
+    <div ma-selector="#q-3b-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage3b.value, $ctrl.data.q3bStatus.value)"></div>
+    <div ma-selector="#q-3b-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage3b.value, $ctrl.data.q3bStatus.value)"></div>
+    
+    <div ma-selector="#q-4a-line1 line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage4a.value, $ctrl.data.current4a.value)"></div>
+    <div ma-selector="#q-4a-line2 line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage4a.value, $ctrl.data.current4a.value)"></div>
+    <div ma-selector="#q-4a-c1 polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage4a.value, $ctrl.data.q4aStatus.value)"></div>
+    <div ma-selector="#q-4a-c2 polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage4a.value, $ctrl.data.q4aStatus.value)"></div>
+    
+    <div ma-selector="#q-4b-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage4b.value, $ctrl.data.current4b.value)"></div>
+    <div ma-selector="#q-4b-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage4b.value, $ctrl.data.q4bStatus.value)"></div>
+    <div ma-selector="#q-4b-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage4b.value, $ctrl.data.q4bStatus.value)"></div>
+    
+    <!-- Center Lines Side A-->
+    
+    <div ma-selector="#q-t01-line3_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-t01-line4_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-t01-c4_2_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-t01-c3_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-t02-line3_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-t02-line4_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-t02-c4_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-t02-c3_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-1a-line3_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-1a-line4_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-1a-c4_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-1a-c3_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-1b-line3_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-1b-line4_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-1b-c4_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-1b-c3_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-2a-line3_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-2a-line4_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-2a-c4_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-2a-c3_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-2b-line3_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-2b-line4_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-2b-c4_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-2b-c3_1_ polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-24-line3_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-24-c4 polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#q-24-c3 polyline" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#line-side1_1_ line" ng-class="$ctrl.centerLineSideA()"></div>
+    <div ma-selector="#bt-01-status_1_ circle" ng-class="$ctrl.centerCircleSideA()"></div>
+    <div ma-selector="#bt-02-status_1_ circle" ng-class="$ctrl.centerCircleSideA()"></div>
+    <div ma-selector="#bt-03-status_1_ circle" ng-class="$ctrl.centerCircleSideA()"></div>
+    <div ma-selector="#bt-04-status_1_ circle" ng-class="$ctrl.centerCircleSideA()"></div>
+    
+    <!--ATS Bus-->
+    
+    <div ma-selector="#q-g01-line3_1_ line" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-g01-line4_1_ line" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-g01-c4_1_ polyline" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-g01-c3_1_ polyline" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-g02-line3_1_ line" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-g02-line4_1_ line" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-g02-c4_1_ polyline" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-g02-c3_1_ polyline" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-p-line3_1_ line" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-p-line4_1_ line" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-p-c4_1_ polyline" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-p-c3_1_ polyline" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-rn-line3_1_ line" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-rn-line4_1_ line" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-rn-c4_1_ polyline" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#q-rn-c3_1_ polyline" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#line-side2_2_ line" ng-class="$ctrl.atsLinesBus()"></div>
+    <div ma-selector="#bt-ats2-status_1_ circle" ng-class="$ctrl.atsCircleBus()"></div>
+    <div ma-selector="#bt-ats1-status_1_ circle" ng-class="$ctrl.atsCircleBus()"></div>
+    
+    <!-- Center Lines Side B-->
+    
+    <div ma-selector="#q-t03-line3_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-t03-line4_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-t03-c4_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-t03-c3_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-3a-line3_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-3a-line4_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-3a-c4_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-3a-c3_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-3b-line3_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-3b-line4_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-3b-c4_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-3b-c3_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-4a-line3 line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-4a-line4 line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-4a-c4 polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-4a-c3 polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-4b-line3_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-4b-line4_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-4b-c4_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-4b-c3_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#line-side2_3_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#bt-06-status_1_ circle" ng-class="$ctrl.centerCircleSideB()"></div>
+    <div ma-selector="#bt-07-status_1_ circle" ng-class="$ctrl.centerCircleSideB()"></div>
+    <div ma-selector="#bt-08-status_1_ circle" ng-class="$ctrl.centerCircleSideB()"></div>
+    <div ma-selector="#q-24-line1_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-24-line2_1_ line" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-24-c1_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    <div ma-selector="#q-24-c2_1_ polyline" ng-class="$ctrl.centerLineSideB()"></div>
+    
+    <!-- ATS Upper Lines-->
+    
+    <div ma-selector="#q-rn-line1 polyline" ng-class="$ctrl.upperLineClass($ctrl.data.voltage4b.value, $ctrl.data.current4b.value)"></div>
+    <div ma-selector="#q-rn-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltage4b.value, $ctrl.data.current4b.value)"></div>
+    <div ma-selector="#q-rn-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage4b.value, $ctrl.data.current4b.value)"></div>
+    <div ma-selector="#q-rn-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltage4b.value, $ctrl.data.current4b.value)"></div>
+    
+    <div ma-selector="#q-p-line1_1_ polyline" ng-class="$ctrl.upperLineClass($ctrl.data.voltageP.value, $ctrl.data.currentP.value)"></div>
+    <div ma-selector="#q-p-line2_1_ line" ng-class="$ctrl.upperLineClass($ctrl.data.voltageP.value, $ctrl.data.currentP.value)"></div>
+    <div ma-selector="#q-p-c1_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageP.value, $ctrl.data.currentP.value)"></div>
+    <div ma-selector="#q-p-c2_1_ polyline" ng-class="$ctrl.upperConnectorClass($ctrl.data.voltageP.value, $ctrl.data.currentP.value)"></div>
+    
+
+</ma-svg>
+

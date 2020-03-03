@@ -1,0 +1,655 @@
+<style>
+     
+    @keyframes cw {
+        from {
+            stroke-dashoffset:100;
+        }
+        to {
+            stroke-dashoffset:0;
+        }
+    }
+    .live {
+        stroke:#F04D4F !important;
+        stroke-dasharray:0 !important;
+       
+    }
+    
+    .dead {
+        stroke:#61B576 !important;
+        stroke-dasharray:0 !important;
+       
+    }
+    
+    .line-active {
+        stroke-dasharray:4 !important;
+        stroke-dashoffset:100;
+        animation: cw 10s linear infinite;
+    }
+    .fill-green {
+        fill: #61B576 !important;
+    }
+    
+    .fill-red {
+        fill: #F04D4F !important;
+    }
+    
+    .fill-yellow {
+        fill: #FFBD6E !important;
+        
+    }
+    
+    .hide {
+        display:none;
+    }
+    
+    .fill-white {
+        fill: #FFFFFF !important;
+    }
+</style>
+<ma-get-point-value point="$ctrl.feeders.q1aStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q1aPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q1aVoltageLl"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q1bStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q1bPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q1bVoltageLl"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q2aStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q2aPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q2aVoltageLl"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q2bStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q2bPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q2bVoltageLl"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q3aStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q3aPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q3aVoltageLl"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q3bStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q3bPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q3bVoltageLl"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q4aPf"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q4aStatus"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.q4aVoltageLl"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.qT01Status"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.qT02Status"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.qT03Status"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.qT02Voltage"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.feeders.busLive"></ma-get-point-value>
+
+<div flex="100" layout="row" layout-wrap >
+    <md-input-container flex="100" flex-gt-sm="50" flex-gt-md="25" ng-style="{paddingTop: '10px', paddingBottom: '10px', paddingLeft: '10px'}">
+        <label>Seleccione el circuito alimentador</label>
+        <md-select ng-model="$ctrl.selectedFeeder" ng-change="$ctrl.selectFeeder($ctrl.selectedFeeder)" >
+            <md-option ng-repeat="feederName in $ctrl.feederNames" ng-value="feederName">{{feederName}}</md-option>
+        </md-select>
+    </md-input-container>
+</div>
+<div flex="100" layout="row" layout-align="start center" >
+    <md-card flex="100" layout="column">
+        <md-card-content>
+            <div flex="100" layout="row" layout-align="start start" layout-align-gt-sm="start start" layout-wrap>
+                <div layout="column" flex="100" flex-gt-sm="100" flex-gt-md="20">
+                
+                    <ma-svg   ng-include="'/rest/v2/file-stores/public/resources/img/feeders-icon.svg'" ng-style="{height:'400px', paddingTop: '20px', paddingBottom:'20px'}">
+                        <div ma-selector="#barra-1a-title text" ng-bind="$ctrl.selectedFeeder"></div>
+                        <div ma-selector="#Q-1A text" ng-bind ="$ctrl.feedersName()" ></div>
+                        <div ma-selector="#OFF text" ng-bind ="$ctrl.boardStatus()" ></div>
+                        <div ma-selector="#q-1a-status-color rect" ng-class="$ctrl.boardColors()"></div>
+                        <div ma-selector="#q-1a-warning path" ng-class="$ctrl.boardWarning()"></div>
+                        <div ma-selector="#PF text" ng-class="$ctrl.boardPf()"></div>
+                        
+                        <div ma-selector="#q-1a-line2 line" ng-class="$ctrl.boardLines()"></div>
+                        <div ma-selector="#q-1a-line2-2 line" ng-class="$ctrl.boardLines()"></div>
+                        <div ma-selector="#q-1a-c2 path" ng-class="$ctrl.boardConnector()"></div>
+                        <div ma-selector="#q-1a-c1 path" ng-class="$ctrl.boardConnector()"></div>
+                        
+                        <div ma-selector="#q-1a-line4 line" ng-class="$ctrl.boardSide()"></div>
+                        <div ma-selector="#q-1a-line4-2 line" ng-class="$ctrl.boardSide()"></div>
+                        <div ma-selector="#q-1a-c4 path" ng-class="$ctrl.boardSide()"></div>
+                        <div ma-selector="#q-1a-c3 path" ng-class="$ctrl.boardSide()"></div>
+                        <div ma-selector="#q-1a-line3 line" ng-class="$ctrl.boardSide()"></div>
+                        <div ma-selector="#bt-01-status circle" ng-class="$ctrl.boardCircle()"></div>
+    
+                    </ma-svg>     
+                </div>
+
+                <div layout="column" flex="100" flex-gt-sm="100" flex-gt-md="20">
+                    <md-card ng-style="{background:'#122F48'}">
+                        <md-card-content ng-style="{height:'400px', paddingTop: '20px', paddingBottom:'20px'}">
+                            <div ng-if ="$ctrl.selectedFeeder === 'ASG1'">
+                                <span class="text-title">Capacidad</span>
+                                <p class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}"> {{$ctrl.site.asg1Circuit.capacity}} </p>
+                                </br>
+                                <span class="text-title">Subtableros</span>  
+                                <p ng-repeat = "x in $ctrl.basg1"class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}">- {{x}}</p>
+                            </div>
+                            <div ng-if ="$ctrl.selectedFeeder === 'ASG2'">
+                                <span class="text-title">Capacidad</span>
+                                <p class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}"> {{$ctrl.site.asg2Circuit.capacity}} </p>
+                                </br>
+                                <span class="text-title">Subtableros</span>  
+                                <p ng-repeat = "x in $ctrl.basg2"class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}">- {{x}}</p>
+                            </div>
+                            <div ng-if ="$ctrl.selectedFeeder === 'ASG3'">
+                                <span class="text-title">Capacidad</span>
+                                <p class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}"> {{$ctrl.site.asg3Circuit.capacity}} </p>
+                                </br>
+                                <span class="text-title">Subtableros</span>  
+                                <p ng-repeat = "x in $ctrl.basg3"class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}">- {{x}}</p>
+                            </div>
+                            <div ng-if ="$ctrl.selectedFeeder === 'COND3'">
+                                <span class="text-title">Capacidad</span>
+                                <p class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}"> {{$ctrl.site.cond3Circuit.capacity}} </p>
+                                </br>
+                                <span class="text-title">Subtableros</span>  
+                                <p ng-repeat = "x in $ctrl.bcond3"class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}">- {{x}}</p>
+                            </div>
+                            <div ng-if ="$ctrl.selectedFeeder === 'DSG1'">
+                                <span class="text-title">Capacidad</span>
+                                <p class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}"> {{$ctrl.site.dsg1Circuit.capacity}} </p>
+                                </br>
+                                <span class="text-title">Subtableros</span>  
+                                <p ng-repeat = "x in $ctrl.btsg1"class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}">- {{x}}</p>
+                            </div>
+                            <div ng-if ="$ctrl.selectedFeeder === 'DSG2'">
+                                <span class="text-title">Capacidad</span>
+                                <p class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}"> {{$ctrl.site.dsg2Circuit.capacity}} </p>
+                                </br>
+                                <span class="text-title">Subtableros</span>  
+                                <p ng-repeat = "x in $ctrl.btsg2"class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}">- {{x}}</p>
+                            </div>
+                            <div ng-if ="$ctrl.selectedFeeder === 'BP'">
+                                <span class="text-title">Capacidad</span>
+                                <p class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}"> {{$ctrl.site.bpCircuit.capacity}} </p>
+                                </br>
+                                <span class="text-title">Subtableros</span>  
+                                <p ng-repeat = "x in $ctrl.bbp"class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}">- {{x}}</p>
+                            </div>
+                          
+                        </md-card-content>
+                    </md-card>
+                    
+                </div>
+                <div layout="column" flex="100" flex-gt-sm="100" flex-gt-md="60">
+                    <div layout="row" flex="100" layout-align="start start" layout-wrap>
+                        <div flex="100" flex-gt-sm="50" flex-gt-md="33" layout="column">
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'ASG1'"
+                                title-card = "Estado" 
+                                data ="$ctrl.feeders.q2aStatus"
+                            ></ph-simple-card>  
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'ASG2'"
+                                title-card = "Estado" 
+                                data ="$ctrl.feeders.q3aStatus"
+                            ></ph-simple-card> 
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'ASG3'"
+                                title-card = "Estado" 
+                                data ="$ctrl.feeders.q1aStatus"
+                            ></ph-simple-card>  
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'COND3'"
+                                title-card = "Estado" 
+                                data ="$ctrl.feeders.q2bStatus"
+                            ></ph-simple-card>  
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'DSG1'"
+                                title-card = "Estado" 
+                                data ="$ctrl.feeders.q1bStatus"
+                            ></ph-simple-card>  
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'DSG2'"
+                                title-card = "Estado" 
+                                data ="$ctrl.feeders.q3bStatus"
+                            ></ph-simple-card>  
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'BP'"
+                                title-card = "Estado" 
+                                data ="$ctrl.feeders.q4aStatus"
+                            ></ph-simple-card>  
+                          
+                        </div>
+                        <div flex="100" flex-gt-sm="50" flex-gt-md="33" layout="column" >
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'ASG1'"
+                                title-card = "Consumo del mes" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+                                data ="$ctrl.feeders.q2aPower"
+                                integral="true"
+                               
+                            ></ph-simple-card>  
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'ASG2'"
+                                title-card = "Consumo del mes" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+                                data ="$ctrl.feeders.q3aPower"
+                                integral="true"
+                               
+                            ></ph-simple-card> 
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'ASG3'"
+                                title-card = "Consumo del mes" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+                                data ="$ctrl.feeders.q1aPower"
+                                integral="true"
+                               
+                            ></ph-simple-card> 
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'COND3'"
+                                title-card = "Consumo del mes" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+                                data ="$ctrl.feeders.q2bPower"
+                                integral="true"
+                               
+                            ></ph-simple-card> 
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'DSG1'"
+                                title-card = "Consumo del mes" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+                                data ="$ctrl.feeders.q1bPower"
+                                integral="true"
+                               
+                            ></ph-simple-card> 
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'DSG2'"
+                                title-card = "Consumo del mes" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+                                data ="$ctrl.feeders.q3bPower"
+                                integral="true"
+                               
+                            ></ph-simple-card>
+                            <ph-simple-card ng-if ="$ctrl.selectedFeeder === 'BP'"
+                                title-card = "Consumo del mes" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/runtime-icon.svg"
+                                data ="$ctrl.feeders.qpPower"
+                                integral="true"
+                               
+                            ></ph-simple-card> 
+                        </div>
+                        <div flex="100" flex-gt-sm="50" flex-gt-md="33" layout="column" >
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'ASG1'" 
+                                title-card="Potencia actual" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+                                data="$ctrl.feeders.q2aPower" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="576"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="KVA"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'ASG2'" 
+                                title-card="Potencia actual" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+                                data="$ctrl.feeders.q3aPower" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="768"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="KVA"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'ASG3'" 
+                                title-card="Potencia actual" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+                                data="$ctrl.feeders.q1aPower" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="768"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="KVA"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'COND3'" 
+                                title-card="Potencia actual" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+                                data="$ctrl.feeders.q2bPower" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="576"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="KVA"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'DSG1'" 
+                                title-card="Potencia actual" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+                                data="$ctrl.feeders.q1bPower" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="576"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="KVA"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'DSG2'" 
+                                title-card="Potencia actual" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+                                data="$ctrl.feeders.q3bPower" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="576"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="KVA"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'BP'" 
+                                title-card="Potencia actual" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/power-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/power-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/power-icon-red.svg"
+                                data="$ctrl.feeders.qpPower" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="384"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="KVA"
+                            ></ph-total-card>
+                           
+                        </div>
+                    </div> 
+                    <div layout="row" flex="100" layout-align="start start" layout-wrap>
+                        <div flex="100" flex-gt-sm="50" flex-gt-md="33" layout="column">
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'ASG1'"
+                                title-card="Corriente total" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                data="$ctrl.feeders.q2aCurrent" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="1200"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="A"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'ASG2'"
+                                title-card="Corriente total" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                data="$ctrl.feeders.q3aCurrent" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="1600"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="A"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'ASG3'"
+                                title-card="Corriente total" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                data="$ctrl.feeders.q1aCurrent" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="1600"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="A"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'COND3'"
+                                title-card="Corriente total" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                data="$ctrl.feeders.q2bCurrent" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="1200"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="A"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'DSG1'"
+                                title-card="Corriente total" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                data="$ctrl.feeders.q1bCurrent" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="1200"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="A"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'DSG2'"
+                                title-card="Corriente total" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                data="$ctrl.feeders.q3bCurrent" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="1200"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="A"
+                            ></ph-total-card>
+                            <ph-total-card ng-if ="$ctrl.selectedFeeder === 'BP'"
+                                title-card="Corriente total" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/current-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/current-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/current-icon-red.svg"
+                                data="$ctrl.feeders.qpCurrent" 
+                                total-squares="20"
+                                min-value="0"
+                                max-value="800"
+                                first-interval="70"
+                                second-interval="85"
+                                unit="A"
+                            ></ph-total-card>
+                            
+                        </div>
+                        <div flex="100" flex-gt-sm="50" flex-gt-md="33" layout="column" >
+                           <ph-average-card ng-if ="$ctrl.selectedFeeder === 'ASG1'"
+                                title-card="Voltaje L-L promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q2aVoltageLl" 
+                                total-squares="20"
+                                min-value="438"
+                                avg-value="480"
+                                max-value="528"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'ASG2'"
+                                title-card="Voltaje L-L promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q3aVoltageLl" 
+                                total-squares="20"
+                                min-value="438"
+                                avg-value="480"
+                                max-value="528"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'ASG3'"
+                                title-card="Voltaje L-L promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q1aVoltageLl" 
+                                total-squares="20"
+                                min-value="438"
+                                avg-value="480"
+                                max-value="528"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'COND3'"
+                                title-card="Voltaje L-L promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q2bVoltageLl" 
+                                total-squares="20"
+                                min-value="438"
+                                avg-value="480"
+                                max-value="528"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'DSG1'"
+                                title-card="Voltaje L-L promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q1bVoltageLl" 
+                                total-squares="20"
+                                min-value="438"
+                                avg-value="480"
+                                max-value="528"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'DSG2'"
+                                title-card="Voltaje L-L promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q3bVoltageLl" 
+                                total-squares="20"
+                                min-value="438"
+                                avg-value="480"
+                                max-value="528"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'BP'"
+                                title-card="Voltaje L-L promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.qpVoltageLl" 
+                                total-squares="20"
+                                min-value="438"
+                                avg-value="480"
+                                max-value="528"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            
+                        </div>
+                        <div flex="100" flex-gt-sm="50" flex-gt-md="33" layout="column" >
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'ASG1'"
+                                title-card="Voltaje L-N promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q2aVoltageLn" 
+                                total-squares="20"
+                                min-value="249"
+                                avg-value="277"
+                                max-value="304"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'ASG2'"
+                                title-card="Voltaje L-N promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q3aVoltageLn" 
+                                total-squares="20"
+                                min-value="249"
+                                avg-value="277"
+                                max-value="304"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'ASG3'"
+                                title-card="Voltaje L-N promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q1aVoltageLn" 
+                                total-squares="20"
+                                min-value="249"
+                                avg-value="277"
+                                max-value="304"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'COND3'"
+                                title-card="Voltaje L-N promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q2bVoltageLn" 
+                                total-squares="20"
+                                min-value="249"
+                                avg-value="277"
+                                max-value="304"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'DSG1'"
+                                title-card="Voltaje L-N promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q1bVoltageLn" 
+                                total-squares="20"
+                                min-value="249"
+                                avg-value="277"
+                                max-value="304"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'DSG2'"
+                                title-card="Voltaje L-N promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.q3bVoltageLn" 
+                                total-squares="20"
+                                min-value="249"
+                                avg-value="277"
+                                max-value="304"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            <ph-average-card ng-if ="$ctrl.selectedFeeder === 'BP'"
+                                title-card="Voltaje L-N promedio" 
+                                icon-card="/rest/v2/file-stores/public/resources/img/voltage-icon.svg"
+                                icon-card-yellow="/rest/v2/file-stores/public/resources/img/voltage-icon-yellow.svg"
+                                icon-card-red="/rest/v2/file-stores/public/resources/img/voltage-icon-red.svg"
+                                data="$ctrl.feeders.qpVoltageLn" 
+                                total-squares="20"
+                                min-value="249"
+                                avg-value="277"
+                                max-value="304"
+                                first-interval="50"
+                                second-interval="75"
+                                unit="V"
+                            ></ph-average-card>
+                            
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
+<div flex="100" flex-gt-sm="100" flex-gt-lg="90" layout="column" layout-align-gt-sm-lg="center center" ng-style="{paddingTop: '10px', paddingBottom: '10px'}">
+  <ph-charts site="$ctrl.site"  data = $ctrl.data ></ph-charts>
+ 
+</div>

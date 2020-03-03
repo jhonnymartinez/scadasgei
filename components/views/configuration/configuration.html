@@ -1,0 +1,45 @@
+<style>    
+    .text-title {
+        color: #D0D4E6;
+       
+        font-size: 3rem;
+    }
+    .text-body {
+        color: #D0D4E6;
+        
+        font-size: 2rem;
+    }
+</style>  
+
+<md-card flex="100" layout="column">
+    <md-card-title>
+        <md-card-title-text>
+            <span class="text-title">Configuración</span>
+        </md-card-title-text>
+    </md-card-title>
+    
+    <span ng-style="{paddingLeft: '24px'}" >Duración del pulso:<ma-set-point-value point="$ctrl.duration.pulse"></ma-set-point-value></span>
+    
+<md-table-container>
+    <table md-table md-progress="promise">
+       
+        <thead md-head md-order="page.orderBy">
+            <tr md-row>
+                <th md-column md-order-by="feeder">Interruptores</th>
+                <th md-column md-order-by="delayOn">Delay de encendido</th>
+                <th md-column md-order-by="delayOff">Delay de apagado</th>
+            </tr>
+        </thead>
+
+        <tbody md-body>
+            <tr md-row ng-repeat="breaker in $ctrl.tableData | orderBy : page.orderBy">
+                <td md-cell>{{breaker.name}}</td>
+                <td md-cell><ma-set-point-value point="breaker.onDelay"></ma-set-point-value></td>
+                <td md-cell><ma-set-point-value point="breaker.offDelay"></ma-set-point-value></td>
+               
+            </tr>
+        </tbody>
+    </table>
+</md-table-container>
+
+</md-card>

@@ -1,0 +1,117 @@
+<style>
+    .square-blank {
+        height: 10px;
+        min-width: 1rem;
+        border: 1px #AAB2C5 solid;
+    }
+    .square-white {
+        height: 10px;
+        min-width: 1rem;
+        background: #D0D4E6;
+        border: 1px #D0D4E6 solid;
+    }
+    .square-yellow {
+        height: 10px;
+        min-width: 1rem;
+        background: #FFBD6E;
+        border: 1px #FFBD6E solid;
+    }
+    .square-red {
+        height: 10px;
+        min-width: 1rem;
+        background: #F04D4F;
+        border: 1px #F04D4F solid;
+    }
+    .value-text {
+        font-size: 3rem;
+        font-weight:700;
+        font-family: 'Quicksand';
+    }
+    .card-title {
+        font-size: 1.5rem;
+        color: #AAB2C5;
+    }
+    .icon {
+        width:80%;
+    }
+    .text-white {
+        color: #D0D4E6;
+    }
+    .text-yellow {
+        color: #FFBD6E;
+    }
+    .text-red {
+        color: #F04D4F;
+    }
+    .card-total{
+        padding-top:'3px' !important;
+        padding-bottom:'3px' !important;
+       
+    }
+    
+    @media (max-width: 1400px) and (min-width: 1280px) {
+        .square-blank {
+            height: 7px;
+            min-width: 0.65rem;
+        }
+        .square-white {
+            height: 7px;
+            min-width: 0.65rem;
+        }
+        .square-yellow {
+            height: 7px;
+            min-width: 0.65rem;
+        }
+        .square-red {
+            height: 7px;
+            min-width: 0.65rem;
+        }
+
+        .value-text {
+            font-size: 2.5rem;
+        }
+        .card-title {
+            font-size: 1.1rem;
+        }
+    }
+    
+</style>
+<ma-get-point-value  point="$ctrl.data"></ma-get-point-value>
+<md-card ng-style="{background:'#122F48'}">
+    <md-card-content>
+        
+        <div flex="100" layout="row" layout-align="start start" class ="card-total">
+            <div flex="15" flex-gt-sm="20" flex-gt-lg="15" layout="column">
+                <img ng-if="$ctrl.color == 'white'" class="icon" src="{{$ctrl.iconCard}}">
+                <img ng-if="$ctrl.color == 'yellow'" class="icon" src="{{$ctrl.iconCardYellow}}">
+                <img ng-if="$ctrl.color == 'red'" class="icon" src="{{$ctrl.iconCardRed}}">
+            </div>
+         
+            <div flex layout="column" class="md-list-item-text">
+                <p class="md-caption card-title" ng-style="{marginTop:'0px', marginBottom:'0px'}"> {{$ctrl.titleCard}} </p>
+                <span ng-if="$ctrl.data.value < 0 "  class="value-text text-white">N/A</span> 
+                <span ng-if="$ctrl.color == 'white' && $ctrl.data.value >= 0" class="value-text text-white">{{$ctrl.data.renderedValue}}</span>
+                <span ng-if="$ctrl.color == 'yellow' && $ctrl.data.value >= 0" class="value-text text-yellow">{{$ctrl.data.renderedValue}}</span>
+                <span ng-if="$ctrl.color == 'red' && $ctrl.data.value >= 0" class="value-text text-red">{{$ctrl.data.renderedValue}}</span>
+     
+            </div>
+        </div>
+         
+        <div  flex="100" layout="row" layout-align="space-between center" ng-style="{paddingTop:'10px'}" >
+            <div ng-repeat="x in $ctrl.squares track by $index">
+                <div flex class="square-blank" ng-if="x === 'blank'"></div>  
+                <div flex class="square-white" ng-if="x === 'white'"></div>  
+                <div flex class="square-yellow" ng-if="x === 'yellow'"></div>  
+                <div flex class="square-red" ng-if="x === 'red'"></div>
+            </div>
+        </div>
+        <div flex="100" layout="row" layout-align="space-between center" ng-style="{paddingTop:'5px'}" >
+            <p class="md-caption" ng-style="{margin: '0'}"  >
+                {{$ctrl.minValue}} {{$ctrl.unit}}
+            </p>
+            <p class="md-caption" ng-style="{margin: '0'}"  >
+                {{$ctrl.maxValue}} {{$ctrl.unit}}    
+            </p>
+        </div>
+    </md-card-content>
+</md-card>

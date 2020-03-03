@@ -1,0 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap');
+
+h1,h2,h3,h4,h5,p {
+    font-family: 'Quicksand', sans-serif;
+}

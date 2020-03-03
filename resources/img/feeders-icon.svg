@@ -1,0 +1,145 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185.24 509.86">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #d0d4e6;
+      }
+
+      .cls-2, .cls-3 {
+        fill: none;
+        stroke: #f04d50;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        stroke-dasharray: 3;
+      }
+
+      .cls-4 {
+        fill: #494d56;
+      }
+
+      .cls-13, .cls-5, .cls-6, .cls-8, .cls-9 {
+        isolation: isolate;
+      }
+
+      .cls-6 {
+        font-size: 28px;
+      }
+
+      .cls-6, .cls-8 {
+        fill: #fff;
+      }
+
+      .cls-13, .cls-6, .cls-8, .cls-9 {
+        font-family: Quicksand-Bold, Quicksand;
+        font-weight: 700;
+      }
+
+      .cls-7 {
+        fill: #f04d50;
+      }
+
+      .cls-8, .cls-9 {
+        font-size: 17px;
+      }
+
+      .cls-12, .cls-9 {
+        fill: #7e8699;
+      }
+
+      .cls-10 {
+        fill: #fcbc6d;
+      }
+
+      .cls-11 {
+        fill: #a6acbf;
+      }
+
+      .cls-13 {
+        font-size: 21px;
+      }
+    </style>
+  </defs>
+  <title>feeder-icon</title>
+  <g id="Group_2884" data-name="Group 2884">
+    <g id="Bgs">
+      <rect id="Rectangle_3598" data-name="Rectangle 3598" class="cls-1" y="106.87" width="185.24" height="402.99"/>
+      <rect id="Rectangle_3599" data-name="Rectangle 3599" class="cls-1" x="72.35" y="77.24" width="40.54" height="34.59"/>
+    </g>
+    <g id="Drawing">
+      <g id="q-1a-line4">
+        <line id="Line_250" data-name="Line 250" class="cls-2" x1="94.19" y1="463.72" x2="94.19" y2="416.19"/>
+      </g>
+      <g id="q-1a-line4-2">
+        <line id="Line_251" data-name="Line 251" class="cls-3" x1="18.04" y1="467.03" x2="171.08" y2="467.03"/>
+      </g>
+      <g id="q-1a-c4">
+        <path id="Path_5400" data-name="Path 5400" class="cls-3" d="M81.61,403.61l12.58,12.58,11.89-11.89" transform="translate(0)"/>
+      </g>
+      <g id="q-1a-c3">
+        <path id="Path_5401" data-name="Path 5401" class="cls-3" d="M81.61,387.18l12.93,12.58,11.89-11.88" transform="translate(0)"/>
+      </g>
+      <g id="q-1a-line3">
+        <line id="Line_252" data-name="Line 252" class="cls-2" x1="94.54" y1="349.08" x2="94.54" y2="396.27"/>
+      </g>
+      <g id="q-1a-background">
+        <rect id="q-t01-background" class="cls-4" x="23.94" y="219.76" width="139.46" height="108.35"/>
+      </g>
+      <g id="q-1a-title">
+        <g id="Q-1A" class="cls-5">
+          <text class="cls-6" transform="translate(61.11 308.87)">Q-1A</text>
+        </g>
+      </g>
+      <g id="q-1a-status-color">
+        <rect id="Rectangle_3600" data-name="Rectangle 3600" class="cls-7" x="112.02" y="219.76" width="51.38" height="27.26"/>
+      </g>
+      <g id="q-1a-status-text">
+        <g id="OFF" class="cls-5">
+          <text class="cls-8" transform="translate(119.47 236.07)">OFF</text>
+        </g>
+      </g>
+      <g id="q-1a-pf-text">
+        <g id="PF" class="cls-5">
+          <text class="cls-9" transform="translate(83.01 236.79)">PF</text>
+        </g>
+      </g>
+      <g id="q-1a-warning">
+        <path id="Path_5402" data-name="Path 5402" class="cls-10" d="M37.57,225l-8.73,15.37a3.11,3.11,0,0,0,2.8,4.55H49.46a3.1,3.1,0,0,0,3.17-3,3.15,3.15,0,0,0-.37-1.53L43.53,225C41.77,222.91,39,222.91,37.57,225Z" transform="translate(0)"/>
+        <g id="Group_2883" data-name="Group 2883">
+          <path id="Path_5403" data-name="Path 5403" class="cls-4" d="M39.33,242.13c-.35-.35-.35-.35-.35-1v-.35a1.28,1.28,0,0,1,.35-1c.35-.35.35-.35.7-.35h.34c.35,0,.7,0,.7.35.35.35.35.35.35,1v.35a1.27,1.27,0,0,1-.35,1c-.34.35-.34.35-.7.35H40C39.67,242.48,39.67,242.48,39.33,242.13Zm.35-5.24L39,229.2a1.4,1.4,0,0,1,2.8,0h0l-.7,7.69c0,.7-.35.7-.7.7-.35.35-.71,0-.71-.7Z" transform="translate(0)"/>
+        </g>
+      </g>
+      <g id="q-1a-line2">
+        <line id="Line_253" data-name="Line 253" class="cls-2" x1="93.15" y1="198.79" x2="93.15" y2="151.26"/>
+      </g>
+      <g id="q-1a-line2-2">
+        <line id="Line_254" data-name="Line 254" class="cls-2" x1="93.15" y1="131.34" x2="93.15" y2="83.8"/>
+      </g>
+      <g id="q-1a-c2">
+        <path id="Path_5404" data-name="Path 5404" class="cls-3" d="M106.08,161.74,93.5,149.16,81.61,161" transform="translate(0)"/>
+      </g>
+      <g id="q-1a-c1">
+        <path id="Path_5405" data-name="Path 5405" class="cls-3" d="M106.08,144.27,93.5,131.34,81.61,143.57" transform="translate(0)"/>
+      </g>
+      <g id="q-1a-details">
+        <rect id="Rectangle_3601" data-name="Rectangle 3601" class="cls-11" x="23.94" y="209.28" width="139.46" height="10.48"/>
+        <rect id="Rectangle_3602" data-name="Rectangle 3602" class="cls-11" x="23.94" y="328.11" width="139.46" height="10.48"/>
+        <rect id="Rectangle_3603" data-name="Rectangle 3603" class="cls-12" x="49.81" y="198.79" width="88.08" height="10.48"/>
+        <rect id="Rectangle_3604" data-name="Rectangle 3604" class="cls-12" x="49.81" y="338.6" width="88.08" height="10.48"/>
+      </g>
+      <g id="barra-1a">
+        <rect id="Rectangle_3605" data-name="Rectangle 3605" class="cls-1" x="39.15" width="108" height="72.35"/>
+        <g id="barra-1a-title" class="cls-5">
+          <text class="cls-13" transform="translate(64.9 41.13)">ASG3</text>
+        </g>
+        <rect id="Rectangle_3606" data-name="Rectangle 3606" class="cls-12" x="48.58" y="72" width="88.08" height="10.48"/>
+      </g>
+      <g id="bt-01-status">
+        <circle id="Ellipse_765" data-name="Ellipse 765" class="cls-7" cx="94.56" cy="467.03" r="12.93"/>
+      </g>
+    </g>
+  </g>
+</svg>

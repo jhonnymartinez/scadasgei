@@ -1,0 +1,60 @@
+<style>    
+    .text-title {
+        color: #D0D4E6;
+       
+        font-size: 3rem;
+    }
+    .text-body {
+        color: #D0D4E6;
+        
+        font-size: 2rem;
+    }
+</style>    
+<div flex="100" layout="row" layout-align="space-between start" layout-wrap>
+    <div flex="100" flex-gt-md="30">
+        <md-card flex="100" layout="column">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="text-title">Statistics</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content flex>
+                <div flex="100">
+                    <ma-filtering-point-list ng-model="$ctrl.selectedPoint" ng-change="$ctrl.addPoint()" query="{{$ctrl.queryString}}"></ma-filtering-point-list>
+                    <md-list flex>
+                        <md-virtual-repeat-container ng-style="{height: '500px'}">
+                            <md-list-item md-virtual-repeat="dataPoint in $ctrl.dataPoints" class="md-2-line">
+                                <div class="md-list-item-text">
+                                    <h3> {{ dataPoint.tags.showName }} </h3>
+                                    <p>{{ dataPoint.deviceName }}</p>
+                                    
+                                </div>
+                                <md-button class="md-secondary md-icon-button" ng-click="$ctrl.deletePoint(dataPoint)">
+                                    <md-icon>close</md-icon>
+                                </md-button>
+                                <md-divider ng-if="!$last"></md-divider>
+                            </md-list-item>
+                        </md-virtual-repeat-container>
+                    </md-list>
+                </div>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <ma-point-values 
+        points="$ctrl.dataPoints" 
+        values="$ctrl.dataPointValues" 
+        from="$ctrl.maUiDateBar.from" 
+        to="$ctrl.maUiDateBar.to"
+        rollup="{{$ctrl.maUiDateBar.rollupType}}" 
+        rollup-interval="{{$ctrl.maUiDateBar.rollupIntervals}} {{$ctrl.maUiDateBar.rollupIntervalPeriod}}">
+    </ma-point-values>
+
+    <div flex="100" flex-gt-md="70">
+        <ma-serial-chart ng-if="$ctrl.dataPoints.length > 0" ng-style="{height: '500px'}" points="$ctrl.dataPoints" values="$ctrl.dataPointValues" legend="true"></ma-serial-chart>
+        <div layout="row" layout-align="center center" flex="100" ng-style="{height: '500px'}" ng-if="$ctrl.dataPoints.length === 0">
+            <p class="text-body">No hay puntos seleccionados</p>
+        </div>
+        
+    </div>
+</div>

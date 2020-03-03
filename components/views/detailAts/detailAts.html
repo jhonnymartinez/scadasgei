@@ -1,0 +1,312 @@
+<style>
+    .value-title {
+        font-size:1.3rem;
+        font-family: 'Quicksand', sans-serif;
+    }
+    
+    .value-value {
+        font-size:2.5rem;
+        font-family: 'Quicksand', sans-serif;
+    }
+    
+    .event-message {
+        font-size:2rem;
+        font-family: 'Quicksand', sans-serif;
+    }
+    
+    .square {
+        width:25px;
+        height:25px;
+        margin-right:20px;
+    }
+    
+    .square-small {
+        width:15px;
+        height:15px;
+        margin-right:10px;
+    }
+    
+    .fill-red {
+        background:#F04D4F !important;
+    }
+    
+    .fill-yellow {
+        background:#FFBD6E !important;
+    }
+    
+    .fill-green {
+        background:#61B576 !important;
+    }
+    
+    .fill-gray {
+        background:#A8AAAD !important;
+    }
+    
+    .card-alarms {
+        background:#122F48;
+        padding: 16px;
+    }
+    
+    .margin-bottom {
+        margin-bottom:20px;
+    }
+    
+    @media (max-width: 768px) {
+        .event-message {
+            font-size:1.5rem;
+        }
+        
+    }
+</style>
+
+<ma-get-point-value point="$ctrl.atsData.autoMode"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.atsData.manualMode"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.atsData.stopMode"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.atsData.busLive"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.atsData.sistemControlKey"></ma-get-point-value>
+
+<ma-get-point-value point="$ctrl.gen01Data.autoMode"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.gen01Data.manualMode"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.gen01Data.stopMode"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.gen01Data.running"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.gen01Data.sistemControlKey"></ma-get-point-value>
+
+<ma-get-point-value point="$ctrl.gen02Data.autoMode"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.gen02Data.manualMode"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.gen02Data.stopMode"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.gen02Data.running"></ma-get-point-value>
+<ma-get-point-value point="$ctrl.gen02Data.sistemControlKey"></ma-get-point-value>
+
+<div ng-if="$ctrl.atsAlarms.length > 0">
+    <div ng-repeat="point in $ctrl.atsAlarms">
+        <ma-get-point-value point="point"></ma-get-point-value>
+    </div>
+</div>
+
+<div ng-if="$ctrl.gen01Alarms.length > 0">
+    <div ng-repeat="point in $ctrl.gen01Alarms">
+        <ma-get-point-value point="point"></ma-get-point-value>
+    </div>
+</div>
+
+<div ng-if="$ctrl.gen02Alarms.length > 0">
+    <div ng-repeat="point in $ctrl.gen02Alarms">
+        <ma-get-point-value point="point"></ma-get-point-value>
+    </div>
+</div>
+
+<div flex="100" layout="column" layout-gt-md="row" layout-margin>
+    
+    <div flex="100" layout-align="center">
+        <ma-svg ng-include="'/rest/v2/file-stores/public/resources/img/8660MKII.svg'" ng-style="{width:'100%'}">
+            
+            <div ma-selector="#ats_x5F_btn_x5F_stop" ng-click="$ctrl.writeWithCompliment($ctrl.atsData.sistemControlKey, 35700)"></div>
+            <div ma-selector="#ats_x5F_btn_x5F_manual" ng-click="$ctrl.writeWithCompliment($ctrl.atsData.sistemControlKey, 35702)"></div>
+            <div ma-selector="#ats_x5F_btn_x5F_test" ng-click="$ctrl.writeWithCompliment($ctrl.atsData.sistemControlKey, 35703)"></div>
+            <div ma-selector="#ats_x5F_btn_x5F_auto" ng-click="$ctrl.writeWithCompliment($ctrl.atsData.sistemControlKey, 35701)"></div>
+            <div ma-selector="#ats_x5F_btn_x5F_silence" ng-click="$ctrl.writeWithCompliment($ctrl.atsData.sistemControlKey, 35706)"></div>
+            <div ma-selector="#ats_x5F_btn_x5F_start" ng-click="$ctrl.writeWithCompliment($ctrl.atsData.sistemControlKey, 35705)"></div>
+            <div ma-selector="#ats_x5F_btn_x5F_gen" ng-click="$ctrl.writeWithCompliment($ctrl.atsData.sistemControlKey, 35708)"></div>
+            <div ma-selector="#ats_x5F_btn_x5F_main" ng-click="$ctrl.writeWithCompliment($ctrl.atsData.sistemControlKey, 35709)"></div>
+            
+            <!--<div ma-selector="#ats_x5F_led_x5F_main circle" ng-style="{'fill': '#A8AAAD'}"></div>-->
+            
+            <div ma-selector="#ats_x5F_led_x5F_main circle"></div>
+     
+        </ma-svg>
+            <md-card>
+                <md-card-content>
+                    <div layout="column" layout-margin>
+                        
+                        <div flex="100" class="title-text"><h1>Controlador de ATS</h1></div>
+                        
+                        <div flex="100" layout="row" layout-align="center center">
+                        
+                            <div ng-if="$ctrl.atsData.autoMode.value" class="square" ng-class="'fill-green'"></div>
+                            <div ng-if="$ctrl.atsData.manualMode.value" class="square" ng-class="'fill-yellow'"></div>
+                            <div ng-if="$ctrl.atsData.stopMode.value" class="square" ng-class="'fill-red'"></div>
+                            <div flex="80" layout="column">
+                                <div flex="100" class="value-title"><span>Modo de operación</span></div>
+                                <div ng-if="$ctrl.atsData.autoMode.value" flex="100" class="value-value"><span>{{$ctrl.atsData.autoMode.renderedValue}}</span></div>
+                                <div ng-if="$ctrl.atsData.manualMode.value" flex="100" class="value-value"><span>{{$ctrl.atsData.manualMode.renderedValue}}</span></div> 
+                                <div ng-if="$ctrl.atsData.stopMode.value" flex="100" class="value-value"><span>{{$ctrl.atsData.stopMode.renderedValue}}</span></div> 
+                            </div> 
+                            
+                        </div>
+                        
+                        <div flex="100" layout="row" layout-align="center center">
+                        
+                            <div class="square fill-red"></div>
+                            <div flex="80" layout="column">
+                                <div flex="100" class="value-title"><span>Conexión Actual</span></div>
+                                <div flex="100" class="value-value"><span>Red normal</span></div> 
+                            </div> 
+                            
+                        </div>
+                        
+                        <div flex="100" class="card-alarms">
+                            <h3>Alarmas actuales ({{$ctrl.atsActualAlarms()}})</h3>
+                            
+                            <div ng-repeat="point in $ctrl.atsAlarms" flex="100" layout="row" layout-align="center center">
+                                <div ng-if="point.value" class="square-small fill-yellow"></div>
+                                <div ng-if="point.value" flex="90" layout="column">
+                                    <div flex="100" class="value-title"><span>{{point.tags.showName}}</span></div>
+                                </div> 
+                            </div>
+                            
+                        </div>
+                        
+                        <div flex="100" class="card-alarms">
+                            <h3>Últimos 5 eventos</h3>
+                            <div ng-repeat="event in $ctrl.atsEvents.items" flex="100" layout="row" layout-align="center center" class="margin-bottom">
+                                <div class="square fill-yellow"></div>
+                                <div flex="80" layout="column">
+                                    <div flex="100" class="event-message"><span>{{event.message}}</span></div>
+                                    <div flex="100" class="value-title"><span>{{event.alarmLevel}} - {{event.activeTimestamp | date:"dd/MM/yyyy ',' h:mma"}}</span></div>
+                                    <hr style="width:100%;border: 1px solid #D0D4E6">
+                                </div> 
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </md-card-content>
+            </md-card>
+    </div>
+    
+    <div flex="100" layout-align="center">
+        <ma-svg ng-include="'/rest/v2/file-stores/public/resources/img/8610.svg'" ng-style="{width:'100%'}">
+            <div ma-selector="#btn_x5F_stop" ng-click="$ctrl.writeWithCompliment($ctrl.gen01Data.sistemControlKey, 35700)"></div>
+            <div ma-selector="#btn_x5F_manual" ng-click="$ctrl.writeWithCompliment($ctrl.gen01Data.sistemControlKey, 35702)"></div>
+            <div ma-selector="#btn_x5F_auto" ng-click="$ctrl.writeWithCompliment($ctrl.gen01Data.sistemControlKey, 35701)"></div>
+            <div ma-selector="#btn_x5F_silence" ng-click="$ctrl.writeWithCompliment($ctrl.gen01Data.sistemControlKey, 35706)"></div>
+            <div ma-selector="#btn_x5F_start" ng-click="$ctrl.writeWithCompliment($ctrl.gen01Data.sistemControlKey, 35705)"></div>
+        </ma-svg>
+            <md-card>
+                <md-card-content>
+                    <div layout="column" layout-margin>
+                        
+                        <div flex="100" class="title-text"><h1>Controlador de Gen 01</h1></div>
+                        
+                        <div flex="100" layout="row" layout-align="center center">
+                        
+                            <div ng-if="$ctrl.gen01Data.autoMode.value" class="square" ng-class="'fill-green'"></div>
+                            <div ng-if="$ctrl.gen01Data.manualMode.value" class="square" ng-class="'fill-yellow'"></div>
+                            <div ng-if="$ctrl.gen01Data.stopMode.value" class="square" ng-class="'fill-red'"></div>
+                            <div flex="80" layout="column">
+                                <div flex="100" class="value-title"><span>Modo de operación</span></div>
+                                <div ng-if="$ctrl.gen01Data.autoMode.value" flex="100" class="value-value"><span>{{$ctrl.gen01Data.autoMode.renderedValue}}</span></div>
+                                <div ng-if="$ctrl.gen01Data.manualMode.value" flex="100" class="value-value"><span>{{$ctrl.gen01Data.manualMode.renderedValue}}</span></div> 
+                                <div ng-if="$ctrl.gen01Data.stopMode.value" flex="100" class="value-value"><span>{{$ctrl.gen01Data.stopMode.renderedValue}}</span></div> 
+                            </div> 
+                            
+                        </div>
+                        
+                        <div flex="100" layout="row" layout-align="center center">
+                        
+                            <div class="square fill-red"></div>
+                            <div flex="80" layout="column">
+                                <div flex="100" class="value-title"><span>Estado Actual</span></div>
+                                <div flex="100" class="value-value"><span>{{$ctrl.gen01Data.running.renderedValue}}</span></div> 
+                            </div> 
+                            
+                        </div>
+                        
+                        <div flex="100" class="card-alarms">
+                            <h3>Alarmas actuales ({{$ctrl.gen01ActualAlarms()}})</h3>
+                            
+                            <div ng-repeat="point in $ctrl.gen01Alarms" flex="100" layout="row" layout-align="center center">
+                                <div ng-if="point.value" class="square-small fill-yellow"></div>
+                                <div ng-if="point.value" flex="90" layout="column">
+                                    <div flex="100" class="value-title"><span>{{point.tags.showName}}</span></div>
+                                </div> 
+                            </div>
+                            
+                        </div>
+                        
+                        <div flex="100" class="card-alarms">
+                            <h3>Últimos 5 eventos</h3>
+                            <div ng-repeat="event in $ctrl.gen01Events.items" flex="100" layout="row" layout-align="center center" class="margin-bottom">
+                                <div class="square fill-yellow"></div>
+                                <div flex="80" layout="column">
+                                    <div flex="100" class="event-message"><span>{{event.message}}</span></div>
+                                    <div flex="100" class="value-title"><span>{{event.alarmLevel}} - {{event.activeTimestamp | date:"dd/MM/yyyy ',' h:mma"}}</span></div>
+                                    <hr style="width:100%;border: 1px solid #D0D4E6">
+                                </div> 
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </md-card-content>
+            </md-card>
+    </div>
+    
+    <div flex="100" layout-align="center">
+        <ma-svg ng-include="'/rest/v2/file-stores/public/resources/img/8610.svg'" ng-style="{width:'100%'}">
+            <div ma-selector="#btn_x5F_stop" ng-click="$ctrl.writeWithCompliment($ctrl.gen02Data.sistemControlKey, 35700)"></div>
+            <div ma-selector="#btn_x5F_manual" ng-click="$ctrl.writeWithCompliment($ctrl.gen02Data.sistemControlKey, 35702)"></div>
+            <div ma-selector="#btn_x5F_auto" ng-click="$ctrl.writeWithCompliment($ctrl.gen02Data.sistemControlKey, 35701)"></div>
+            <div ma-selector="#btn_x5F_silence" ng-click="$ctrl.writeWithCompliment($ctrl.gen02Data.sistemControlKey, 35706)"></div>
+            <div ma-selector="#btn_x5F_start" ng-click="$ctrl.writeWithCompliment($ctrl.gen02Data.sistemControlKey, 35705)"></div>
+        </ma-svg>
+            <md-card>
+                <md-card-content>
+                    <div layout="column" layout-margin>
+                        
+                        <div flex="100" class="title-text"><h1>Controlador de Gen 02</h1></div>
+                        
+                        <div flex="100" layout="row" layout-align="center center">
+                        
+                            <div ng-if="$ctrl.gen02Data.autoMode.value" class="square" ng-class="'fill-green'"></div>
+                            <div ng-if="$ctrl.gen02Data.manualMode.value" class="square" ng-class="'fill-yellow'"></div>
+                            <div ng-if="$ctrl.gen02Data.stopMode.value" class="square" ng-class="'fill-red'"></div>
+                            <div flex="80" layout="column">
+                                <div flex="100" class="value-title"><span>Modo de operación</span></div>
+                                <div ng-if="$ctrl.gen02Data.autoMode.value" flex="100" class="value-value"><span>{{$ctrl.gen02Data.autoMode.renderedValue}}</span></div>
+                                <div ng-if="$ctrl.gen02Data.manualMode.value" flex="100" class="value-value"><span>{{$ctrl.gen02Data.manualMode.renderedValue}}</span></div> 
+                                <div ng-if="$ctrl.gen02Data.stopMode.value" flex="100" class="value-value"><span>{{$ctrl.gen02Data.stopMode.renderedValue}}</span></div> 
+                            </div> 
+                            
+                        </div>
+                        
+                        <div flex="100" layout="row" layout-align="center center">
+                        
+                            <div class="square fill-red"></div>
+                            <div flex="80" layout="column">
+                                <div flex="100" class="value-title"><span>Estado Actual</span></div>
+                                <div flex="100" class="value-value"><span>{{$ctrl.gen02Data.running.renderedValue}}</span></div> 
+                            </div> 
+                            
+                        </div>
+                        
+                        <div flex="100" class="card-alarms">
+                            <h3>Alarmas actuales ({{$ctrl.gen02ActualAlarms()}})</h3>
+                            
+                            <div ng-repeat="point in $ctrl.gen01Alarms" flex="100" layout="row" layout-align="center center">
+                                <div ng-if="point.value" class="square-small fill-yellow"></div>
+                                <div ng-if="point.value" flex="90" layout="column">
+                                    <div flex="100" class="value-title"><span>{{point.tags.showName}}</span></div>
+                                </div> 
+                            </div>
+                            
+                        </div>
+                        
+                        <div flex="100" class="card-alarms">
+                            <h3>Últimos 5 eventos</h3>
+                            <div ng-repeat="event in $ctrl.gen02Events.items" flex="100" layout="row" layout-align="center center" class="margin-bottom">
+                                <div class="square fill-yellow"></div>
+                                <div flex="80" layout="column">
+                                    <div flex="100" class="event-message"><span>{{event.message}}</span></div>
+                                    <div flex="100" class="value-title"><span>{{event.alarmLevel}} - {{event.activeTimestamp | date:"dd/MM/yyyy ',' h:mma"}}</span></div>
+                                    <hr style="width:100%;border: 1px solid #D0D4E6">
+                                </div> 
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </md-card-content>
+            </md-card>
+    </div>
+</div>
